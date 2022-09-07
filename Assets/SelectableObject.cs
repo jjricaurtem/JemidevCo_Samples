@@ -5,11 +5,13 @@ namespace Select3dObject
 {
     public class SelectableObject : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private SelectableObjectTextListener selectableObjectListener; 
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            selectableObjectListener.ShowSelectedElementInformation(gameObject);
+            var renderer = GetComponent<Renderer>();
+            var color = renderer.material.GetColor("_Color");
+            color = color == Color.white ? Color.red : Color.white;
+            renderer.material.SetColor("_Color", color);
         }
     }
 }
